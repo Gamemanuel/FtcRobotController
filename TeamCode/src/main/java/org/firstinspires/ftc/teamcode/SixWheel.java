@@ -22,8 +22,8 @@ public class SixWheel extends LinearOpMode {
         waitForStart();
         while (opModeIsActive()) {
             //put all of the code in here
-            collection.regularDrive(gamepad1.left_stick_y, gamepad1.right_stick_x);
-            //collection.tankdrive(gamepad1.left_stick_y, gamepad1.right_stick_y);
+            //collection.regularDrive(gamepad1.left_stick_y, gamepad1.right_stick_x);
+            collection.tankDrive(gamepad1.left_stick_y, gamepad1.right_stick_y);
             double[] wheelSpeeds = collection.getWheelSpeeds();
 
             robot.frontLeft.setPower(-wheelSpeeds[0]);
