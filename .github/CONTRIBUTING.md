@@ -43,10 +43,6 @@ This guide explains how to contribute code, report issues, and create official r
      fix: correct AprilTag filtering for Obelisk tags
      ```
 
-6. **Pull Request**
-   - Open a PR to the `main` branch.
-   - Describe your changes and link related issues.
-
 ---
 
 ## Creating a Release
@@ -80,7 +76,3 @@ Issue Reporting
 - Steps to reproduce
 - Expected vs. actual behavior
 - Screenshots/logs if applicable
-
-🤝 Code of Conduct
-Be respectful, collaborative, and constructive.
-We are here to learn, compete, and have fun.
