@@ -30,6 +30,7 @@ This guide explains how to contribute code, report issues, and create official r
 3. **Code Style**
    - Follow FTC SDK Java conventions.
    - Keep OpMode names descriptive and consistent.
+   - (No Using Peoples names as the name of the function (nicksDrive)
    - Document hardware mappings in comments.
 
 4. **Testing**
