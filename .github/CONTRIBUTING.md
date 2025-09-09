@@ -43,31 +43,6 @@ This guide explains how to contribute code, report issues, and create official r
      fix: correct AprilTag filtering for Obelisk tags
      ```
 
----
-
-## Creating a Release
-
-When preparing a new release (example: **Version 11.0 – 20250827-105138**):
-
-1. **Update `README.md`**
-   - Ensure installation and usage instructions are current.
-
-2. **Update `CHANGELOG.md`**
-   - Add a new section for the release:
-     ```markdown
-     ## Version 11.0 (20250827-105138)
-     ### Enhancements
-      ### bugs Fixed
-     ```
-
-3. **Tag the Release**
-   ```bash
-   git tag -a v11.0 -m "Version 11.0 (20250827-105138)"
-   git push origin v11.0
-
-   - Publish on GitHub
-- Go to Releases → Draft a new release.
-- Select the tag, add the changelog, and publish.
 
 Issue Reporting
 - Use GitHub Issues for bugs, feature requests, or questions.
