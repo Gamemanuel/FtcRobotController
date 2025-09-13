@@ -11,6 +11,7 @@ import org.firstinspires.ftc.teamcode.RobotClass;
 import org.firstinspires.ftc.teamcode.RobotUtils;
 
 import java.util.List;
+import java.util.Stack;
 
 
 // adds to list of teleop programs as SixWheelDrive
@@ -20,6 +21,8 @@ public class SixWheel extends LinearOpMode {
     RobotClass robot;
     Limelight3A limelight;
     RobotUtils utils;
+
+    String MOTIF;
 
     // makes it so I can access the the motors from different children classes
     @SuppressLint("DefaultLocale")
@@ -53,6 +56,36 @@ public class SixWheel extends LinearOpMode {
                     int tagId = fr.getFiducialId();  // Correct usage
                     telemetry.addData("AprilTag ID", tagId);
                     // You can also access fr.getFamily(), fr.getTargetXDegrees(), etc.
+
+                    // convert tag ID to corresponding MOTIF pattern
+                    // 21 = GPP, 22 = PGP, 23 = PPG
+//                    if (tagId == 21) {
+//                        MOTIF = "GPP";
+//                    }
+//                    if (tagId == 22) {
+//                        MOTIF = "PGP";
+//                    }
+//                    if (tagId == 23) {
+//                        MOTIF = "PGG";
+//                    }
+
+                    // testing new idea should work the same as above /\
+                    switch (tagId) {
+                        case 21:
+                            MOTIF = "GPP";
+                            break;
+                        case 22:
+                            MOTIF = "PGP";
+                            break;
+                        case 23:
+                            MOTIF = "PGG";
+                            break;
+                        default:
+                            telemetry.addData("Unexpected tagId", tagId);
+                    }
+
+                    // display the telemetry value
+                    telemetry.addData("motif", MOTIF);
                 }
             } else {
                 telemetry.addData("Limelight", "No valid AprilTag result");
