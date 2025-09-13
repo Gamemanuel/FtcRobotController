@@ -11,8 +11,7 @@ import org.firstinspires.ftc.teamcode.RobotClass;
 import org.firstinspires.ftc.teamcode.RobotUtils;
 
 import java.util.List;
-import java.util.Stack;
-
+import java.util.Objects;
 
 // adds to list of teleop programs as SixWheelDrive
 @TeleOp(name = "SixWheelDrive", group = "driving")
@@ -21,8 +20,7 @@ public class SixWheel extends LinearOpMode {
     RobotClass robot;
     Limelight3A limelight;
     RobotUtils utils;
-
-    String MOTIF;
+    String MOTIF = "";
 
     // makes it so I can access the the motors from different children classes
     @SuppressLint("DefaultLocale")
@@ -48,7 +46,8 @@ public class SixWheel extends LinearOpMode {
 
             // get the april tag ID
             LLResult result = limelight.getLatestResult();
-            if (result != null && result.isValid()) {
+            // the result must not be null, must be valid, and there must be no current MOTIF (this makes sure that once it finds the motif it does not sense for it again"
+            if (result != null && result.isValid() && Objects.equals(MOTIF, "")) {
                 // Get list of detected AprilTags
                 List<LLResultTypes.FiducialResult> fiducials = result.getFiducialResults();
 
