@@ -5,11 +5,16 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
+import com.qualcomm.hardware.limelightvision.LLResult;
+import com.qualcomm.hardware.limelightvision.LLResultTypes;
+import com.qualcomm.hardware.limelightvision.Limelight3A;
 
 public class RobotClass {
     public DcMotorEx frontLeft, frontRight, backRight, backLeft;
 
     public IMU imu;
+
+    Limelight3A limelight;
 
     public RobotClass(HardwareMap hardwareMap){
         // configures your robot so that the program can interact with it
@@ -31,6 +36,9 @@ public class RobotClass {
                 RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD));
         // Without this, the REV Hub's orientation is assumed to be logo up / USB forward
         imu.initialize(parameters);
+
+        // init the limelight
+        limelight = hardwareMap.get(Limelight3A.class, "limelight");
     }
 
 }
