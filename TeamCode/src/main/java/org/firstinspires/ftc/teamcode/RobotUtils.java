@@ -13,6 +13,8 @@ public class RobotUtils {
     private RobotClass robot;
     private Telemetry telemetry;
     private LinearOpMode opMode;
+    boolean isMotifDecoded = false;
+    String MOTIF = "";
 
     // Constructor for TeleOp (no opMode needed)
     public RobotUtils(RobotClass robot, Telemetry telemetry) {
@@ -61,42 +63,50 @@ public class RobotUtils {
     }
 
     // check for the MOTIF and display it
-    public void CheckForMotif( String MOTIF) {
+    public void CheckForMotif() {
 
         // start the pipeline zero
         robot.limelight.pipelineSwitch(0); // Set to your AprilTag pipeline
         robot.limelight.start();
 
+
         // get the april tag ID
         LLResult result = robot.limelight.getLatestResult();
         // the result must not be null, must be valid, and there must be no current MOTIF (this makes sure that once it finds the motif it does not sense for it again"
-        if (result != null && result.isValid() && (MOTIF == "" )){
-            // Get list of detected AprilTags
-            List<LLResultTypes.FiducialResult> fiducials = result.getFiducialResults();
+        if (!isMotifDecoded) {
+            if (result != null && result.isValid()) {
+                // Get list of detected AprilTags
+                List<LLResultTypes.FiducialResult> fiducials = result.getFiducialResults();
 
-            for (LLResultTypes.FiducialResult fr : fiducials) {
-                int tagId = fr.getFiducialId();  // Correct usage
-                telemetry.addData("AprilTag ID", tagId);
-                // You can also access fr.getFamily(), fr.getTargetXDegrees(), etc.
+                for (LLResultTypes.FiducialResult fr : fiducials) {
+                    int tagId = fr.getFiducialId();  // Correct usage
+                    telemetry.addData("AprilTag ID", tagId);
+                    // You can also access fr.getFamily(), fr.getTargetXDegrees(), etc.
 
-                // convert tag ID to corresponding MOTIF pattern
-                // 21 = GPP, 22 = PGP, 23 = PPG
-                if (tagId == 21) {
-                    MOTIF = "GPP";
-                }
-                if (tagId == 22) {
-                    MOTIF = "PGP";
-                }
-                if (tagId == 23) {
-                    MOTIF = "PPG";
+                    // convert tag ID to corresponding MOTIF pattern
+                    // 21 = GPP, 22 = PGP, 23 = PPG
+                    if (tagId == 21) {
+                        MOTIF = "GPP";
+                    }
+                    if (tagId == 22) {
+                        MOTIF = "PGP";
+                    }
+                    if (tagId == 23) {
+                        MOTIF = "PPG";
+                    }
+
+                    isMotifDecoded = true;
                 }
 
-                // display the telemetry value
-                telemetry.addData("motif", MOTIF);
+            } else {
+                telemetry.addData("Limelight", "No valid AprilTag result");
             }
-        } else {
-            telemetry.addData("Limelight", "No valid AprilTag result");
         }
+
+        // display the MOTIF value
+        telemetry.addData("motif", MOTIF);
+
+        // update the telemetry
         telemetry.update();
     }
 }

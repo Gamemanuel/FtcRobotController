@@ -18,7 +18,7 @@ public class SixWheel extends LinearOpMode {
     RobotClass robot;
 
     RobotUtils utils;
-    String MOTIF = "";
+
 
     // makes it so I can access the the motors from different children classes
     @SuppressLint("DefaultLocale")
@@ -39,7 +39,7 @@ public class SixWheel extends LinearOpMode {
             utils.drive(gamepad1.left_stick_x, gamepad1.right_stick_y);
 
             // check for the MOTIF and display it on the driver hub.
-            utils.CheckForMotif(MOTIF);
+            utils.CheckForMotif();
         }
     }
 }
