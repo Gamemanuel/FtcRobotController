@@ -70,7 +70,7 @@ public class RobotUtils {
         // get the april tag ID
         LLResult result = robot.limelight.getLatestResult();
         // the result must not be null, must be valid, and there must be no current MOTIF (this makes sure that once it finds the motif it does not sense for it again"
-        if (result != null && result.isValid() && Objects.equals(MOTIF, "")) {
+        if (result != null && result.isValid() && (MOTIF == "" )){
             // Get list of detected AprilTags
             List<LLResultTypes.FiducialResult> fiducials = result.getFiducialResults();
 
