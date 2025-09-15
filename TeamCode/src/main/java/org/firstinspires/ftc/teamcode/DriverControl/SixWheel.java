@@ -44,39 +44,43 @@ public class SixWheel extends LinearOpMode {
         while (opModeIsActive()) {
             utils.drive(gamepad1.left_stick_y, gamepad1.right_stick_x);
 
-            // get the april tag ID
-            LLResult result = limelight.getLatestResult();
-            // the result must not be null, must be valid, and there must be no current MOTIF (this makes sure that once it finds the motif it does not sense for it again"
-            if (result != null && result.isValid() && Objects.equals(MOTIF, "")) {
-                // Get list of detected AprilTags
-                List<LLResultTypes.FiducialResult> fiducials = result.getFiducialResults();
-
-                for (LLResultTypes.FiducialResult fr : fiducials) {
-                    int tagId = fr.getFiducialId();  // Correct usage
-                    telemetry.addData("AprilTag ID", tagId);
-                    // You can also access fr.getFamily(), fr.getTargetXDegrees(), etc.
-
-                    // convert tag ID to corresponding MOTIF pattern
-                    // 21 = GPP, 22 = PGP, 23 = PPG
-                    if (tagId == 21) {
-                        MOTIF = "GPP";
-                    }
-                    if (tagId == 22) {
-                        MOTIF = "PGP";
-                    }
-                    if (tagId == 23) {
-                        MOTIF = "PGG";
-                    }
-
-                    // display the telemetry value
-                    telemetry.addData("motif", MOTIF);
-                }
-            } else {
-                telemetry.addData("Limelight", "No valid AprilTag result");
-            }
-            telemetry.update();
-
-
+            // check for the MOTIF and display it on the driver hub.
+            CheckForMotif();
         }
+    }
+
+    // check for the MOTIF and display it
+    public void CheckForMotif() {
+        // get the april tag ID
+        LLResult result = limelight.getLatestResult();
+        // the result must not be null, must be valid, and there must be no current MOTIF (this makes sure that once it finds the motif it does not sense for it again"
+        if (result != null && result.isValid() && Objects.equals(MOTIF, "")) {
+            // Get list of detected AprilTags
+            List<LLResultTypes.FiducialResult> fiducials = result.getFiducialResults();
+
+            for (LLResultTypes.FiducialResult fr : fiducials) {
+                int tagId = fr.getFiducialId();  // Correct usage
+                telemetry.addData("AprilTag ID", tagId);
+                // You can also access fr.getFamily(), fr.getTargetXDegrees(), etc.
+
+                // convert tag ID to corresponding MOTIF pattern
+                // 21 = GPP, 22 = PGP, 23 = PPG
+                if (tagId == 21) {
+                    MOTIF = "GPP";
+                }
+                if (tagId == 22) {
+                    MOTIF = "PGP";
+                }
+                if (tagId == 23) {
+                    MOTIF = "PGG";
+                }
+
+                // display the telemetry value
+                telemetry.addData("motif", MOTIF);
+            }
+        } else {
+            telemetry.addData("Limelight", "No valid AprilTag result");
+        }
+        telemetry.update();
     }
 }
