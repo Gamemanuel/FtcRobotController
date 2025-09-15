@@ -26,11 +26,11 @@ public class RobotUtils {
         this.opMode = opMode;
     }
 
-    public void drive(double leftJoystickY, double rightJoystickX) {
-        robot.frontLeft.setPower(leftJoystickY + rightJoystickX);
-        robot.frontRight.setPower(leftJoystickY - rightJoystickX);
-        robot.backLeft.setPower(leftJoystickY + rightJoystickX);
-        robot.backRight.setPower(leftJoystickY - rightJoystickX);
+    public void drive(double forward, double turn) {
+        robot.frontLeft.setPower(forward + turn);
+        robot.frontRight.setPower(forward - turn);
+        robot.backLeft.setPower(forward + turn);
+        robot.backRight.setPower(forward - turn);
     }
 
     public void runMotors(double power) {

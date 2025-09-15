@@ -36,7 +36,7 @@ public class SixWheel extends LinearOpMode {
 
         // while the program is running
         while (opModeIsActive()) {
-            utils.drive(gamepad1.left_stick_y, gamepad1.right_stick_x);
+            utils.drive(gamepad1.left_stick_x, gamepad1.right_stick_y);
 
             // check for the MOTIF and display it on the driver hub.
             utils.CheckForMotif(MOTIF);
