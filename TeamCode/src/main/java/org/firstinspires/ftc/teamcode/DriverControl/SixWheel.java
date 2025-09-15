@@ -58,29 +58,14 @@ public class SixWheel extends LinearOpMode {
 
                     // convert tag ID to corresponding MOTIF pattern
                     // 21 = GPP, 22 = PGP, 23 = PPG
-//                    if (tagId == 21) {
-//                        MOTIF = "GPP";
-//                    }
-//                    if (tagId == 22) {
-//                        MOTIF = "PGP";
-//                    }
-//                    if (tagId == 23) {
-//                        MOTIF = "PGG";
-//                    }
-
-                    // testing new idea should work the same as above /\
-                    switch (tagId) {
-                        case 21:
-                            MOTIF = "GPP";
-                            break;
-                        case 22:
-                            MOTIF = "PGP";
-                            break;
-                        case 23:
-                            MOTIF = "PGG";
-                            break;
-                        default:
-                            telemetry.addData("Unexpected tagId", tagId);
+                    if (tagId == 21) {
+                        MOTIF = "GPP";
+                    }
+                    if (tagId == 22) {
+                        MOTIF = "PGP";
+                    }
+                    if (tagId == 23) {
+                        MOTIF = "PGG";
                     }
 
                     // display the telemetry value
