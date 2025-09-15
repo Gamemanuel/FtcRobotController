@@ -88,7 +88,7 @@ public class RobotUtils {
                     MOTIF = "PGP";
                 }
                 if (tagId == 23) {
-                    MOTIF = "PGG";
+                    MOTIF = "PPG";
                 }
 
                 // display the telemetry value

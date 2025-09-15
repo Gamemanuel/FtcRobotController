@@ -31,8 +31,6 @@ public class SixWheel extends LinearOpMode {
         // you must initialize this object otherwise it thinks that the function is static and the function errors  .
         utils = new RobotUtils(robot, telemetry);
 
-
-
         // waits for you to click the start button
         waitForStart();
 
