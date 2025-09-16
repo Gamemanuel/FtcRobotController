@@ -18,12 +18,14 @@ public class LeaveTheLine extends LinearOpMode {
         // we Use "this" to pass in the opMode
         utils = new RobotUtils(robot, telemetry, this);
 
-        // TODO: ADD a limelight check for april tags on the obelisk
-
         // waits for you to push the start button
         waitForStart();
 
         if (opModeIsActive()) {
+            // check for the MOTIF and display it on the driver hub.
+            utils.CheckForMotif();
+
+            // Drive forward quick
             utils.driveBasic(0.75, 0.75, 1000);
         }
     }

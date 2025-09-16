@@ -16,7 +16,6 @@ import java.util.Objects;
 public class SixWheel extends LinearOpMode {
 
     RobotClass robot;
-
     RobotUtils utils;
 
 
