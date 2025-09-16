@@ -64,16 +64,15 @@ public class RobotUtils {
 
     // check for the MOTIF and display it
     public void CheckForMotif() {
-
-        // start the pipeline zero
-        robot.limelight.pipelineSwitch(0); // Set to your AprilTag pipeline
-        robot.limelight.start();
-
-
-        // get the april tag ID
-        LLResult result = robot.limelight.getLatestResult();
-        // the result must not be null, must be valid, and there must be no current MOTIF (this makes sure that once it finds the motif it does not sense for it again"
+        // make it so the motif is only decoded once
         if (!isMotifDecoded) {
+            // start the pipeline number zero
+            robot.limelight.pipelineSwitch(0); // Set to your AprilTag pipeline
+            robot.limelight.start();
+
+            // get the april tag ID
+            LLResult result = robot.limelight.getLatestResult();
+            // the result must not be null, must be valid, and there must be no current MOTIF (this makes sure that once it finds the motif it does not sense for it again"
             if (result != null && result.isValid()) {
                 // Get list of detected AprilTags
                 List<LLResultTypes.FiducialResult> fiducials = result.getFiducialResults();
@@ -104,7 +103,7 @@ public class RobotUtils {
         }
 
         // display the MOTIF value
-        telemetry.addData("motif", MOTIF);
+        telemetry.addData("MOTIF", MOTIF);
 
         // update the telemetry
         telemetry.update();
