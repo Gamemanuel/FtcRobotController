@@ -10,6 +10,7 @@ import org.firstinspires.ftc.teamcode.RobotUtils;
 public class TurnToAprilTag extends LinearOpMode {
     RobotClass robot;
     RobotUtils utils;
+    String MOTIF;
 
     @Override
     public void runOpMode() {
@@ -23,7 +24,7 @@ public class TurnToAprilTag extends LinearOpMode {
 
         if (opModeIsActive()) {
             // check for the MOTIF and display it on the driver hub.
-            utils.CheckForMotif();
+            MOTIF = utils.CheckForMotif();
 
             // Turn toward tag with kP=0.03, minPower=0.1, tolerance=1 degree
             utils.turnTowardsAprilTag(0.03, 0.1, 1.0);

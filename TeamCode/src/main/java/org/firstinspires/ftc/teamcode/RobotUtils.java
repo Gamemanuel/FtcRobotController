@@ -63,7 +63,7 @@ public class RobotUtils {
     }
 
     // check for the MOTIF and display it
-    public void CheckForMotif() {
+    public String CheckForMotif() {
         // make it so the motif is only decoded once
         if (!isMotifDecoded) {
             // start the pipeline number zero
@@ -107,6 +107,8 @@ public class RobotUtils {
 
         // update the telemetry
         telemetry.update();
+        
+        return MOTIF;
     }
 
     public void turnTowardsAprilTag(double kP, double minPower, double toleranceDeg) {
@@ -114,46 +116,7 @@ public class RobotUtils {
         robot.limelight.pipelineSwitch(1);
         robot.limelight.start();
 
-        while (opMode != null && opMode.opModeIsActive()) {
-            LLResult result = robot.limelight.getLatestResult();
+        
 
-            if (result != null && result.isValid() && !result.getFiducialResults().isEmpty()) {
-                // Get the first detected tag (you could add logic to pick a specific ID)
-                LLResultTypes.FiducialResult tag = result.getFiducialResults().get(0);
-
-                // Horizontal offset from crosshair to tag center in degrees
-                double tx = tag.getTargetXDegrees();
-
-                telemetry.addData("Target X (deg)", tx);
-
-                // If within tolerance, stop turning
-                if (Math.abs(tx) <= toleranceDeg) {
-                    stopMotors();
-                    telemetry.addLine("Aligned with AprilTag!");
-                    telemetry.update();
-                    break;
-                }
-
-                // Proportional control for turning
-                double turnPower = kP * tx;
-
-                // Apply minimum power to overcome drivetrain deadband
-                if (Math.abs(turnPower) < minPower) {
-                    turnPower = Math.signum(turnPower) * minPower;
-                }
-
-                // Clamp power to [-1, 1]
-                turnPower = Math.max(-1, Math.min(1, turnPower));
-
-                // Turn in place: forward=0, turn=turnPower
-                drive(0, -turnPower); // negative because tx sign is opposite of motor direction
-
-            } else {
-                telemetry.addLine("No AprilTag detected");
-                stopMotors();
-            }
-
-            telemetry.update();
-        }
     }
 }

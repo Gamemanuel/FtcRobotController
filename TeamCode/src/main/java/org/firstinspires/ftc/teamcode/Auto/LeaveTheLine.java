@@ -10,6 +10,7 @@ import org.firstinspires.ftc.teamcode.RobotUtils;
 public class LeaveTheLine extends LinearOpMode {
     RobotClass robot;
     RobotUtils utils;
+    String MOTIF;
 
     @Override
     public void runOpMode() {
@@ -23,7 +24,7 @@ public class LeaveTheLine extends LinearOpMode {
 
         if (opModeIsActive()) {
             // check for the MOTIF and display it on the driver hub.
-            utils.CheckForMotif();
+            MOTIF = utils.CheckForMotif();
 
             // Drive forward quick
             utils.driveBasic(0.75, 0.75, 1000);
