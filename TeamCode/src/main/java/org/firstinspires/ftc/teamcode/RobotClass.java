@@ -14,7 +14,7 @@ public class RobotClass {
 
     public IMU imu;
 
-    Limelight3A limelight;
+    public Limelight3A limelight;
 
     public RobotClass(HardwareMap hardwareMap){
         // configures your robot so that the program can interact with it
