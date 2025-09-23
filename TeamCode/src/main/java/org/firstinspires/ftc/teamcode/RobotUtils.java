@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import static java.lang.Thread.sleep;
+
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
@@ -115,19 +117,22 @@ public class RobotUtils {
         return MOTIF;
     }
 
-    public void turnToAngle(double angleT) {
+    public void turnToAngle(double targetAngle) throws InterruptedException {
         boolean finished = false;
         double maxError = 1;
         while (!finished) {
-            double difference = getHeading() - angleT;
+            double difference = getHeading() - targetAngle;
             if (difference > 0) {
                 drive(0, 0.25);
             } else {
                 drive(0, -0.25);
             }
             if (Math.abs(difference) < maxError) {
-                finished = true;
-                stopMotors();
+                sleep(500);
+                if (Math.abs(difference) < maxError) {
+                    finished = true;
+                    stopMotors();
+                }
             }
         }
 
