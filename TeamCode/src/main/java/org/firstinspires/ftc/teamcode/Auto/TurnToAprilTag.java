@@ -20,8 +20,8 @@ public class TurnToAprilTag extends LinearOpMode {
         robot.imu.resetYaw();
         waitForStart();
         robot.limelight.start();
-        while (!isStopRequested()) {
-            utils.turnToAngle(90);
-        }
+//        while (!isStopRequested()) {
+            utils.turnToAngle(90, .3);
+//        }
     }
 }

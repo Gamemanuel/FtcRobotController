@@ -20,6 +20,7 @@ public class RobotUtils {
     private Telemetry telemetry;
     private LinearOpMode opMode;
     boolean isMotifDecoded = false;
+
     String MOTIF = "";
 
     // Constructor for TeleOp (no opMode needed)
@@ -117,26 +118,34 @@ public class RobotUtils {
         return MOTIF;
     }
 
-    public void turnToAngle(double targetAngle) throws InterruptedException {
+    public void turnToAngle(double targetAngle, double power) throws InterruptedException {
         boolean finished = false;
         double maxError = 1;
-        while (!finished) {
+        while (!finished && !opMode.isStopRequested()) {
             double difference = getHeading() - targetAngle;
             if (difference > 0) {
-                drive(0, 0.25);
+                drive(0, power);
             } else {
-                drive(0, -0.25);
+                drive(0, -power);
             }
+
             if (Math.abs(difference) < maxError) {
+                stopMotors();
                 sleep(500);
+                power = 0.25;
                 if (Math.abs(difference) < maxError) {
                     finished = true;
                     stopMotors();
                 }
             }
+            telemetry.addData("difference", difference);
+            telemetry.update();
         }
-
-        }
+    }
+    public void faceAprilTag() {
+        double maxError = 1;
+//        double difference
+    }
     public double getHeading() {
         Orientation theta = robot.imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES);
         return theta.thirdAngle;

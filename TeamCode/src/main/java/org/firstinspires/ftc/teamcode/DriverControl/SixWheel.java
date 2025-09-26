@@ -34,7 +34,7 @@ public class SixWheel extends OpMode {
         robot.limelight.start();
     }
     public void loop() { //loops as long as the program is running
-        utils.drive(gamepad1.left_stick_x, gamepad1.right_stick_y);
+        utils.drive(gamepad1.left_stick_y, gamepad1.right_stick_x);
         // check for the MOTIF and display it on the driver hub.
         MOTIF = utils.CheckForMotif();
     }
