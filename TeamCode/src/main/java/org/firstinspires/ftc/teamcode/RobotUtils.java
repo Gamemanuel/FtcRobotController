@@ -11,6 +11,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import org.opencv.core.Mat;
 
 import java.util.List;
 import java.util.Objects;
@@ -67,6 +68,11 @@ public class RobotUtils {
         }
 
         stopMotors();
+    }
+
+    public double[] getMotorPowers() {
+        double[] array = {robot.frontLeft.getPower(), robot.frontRight.getPower(), robot.backLeft.getPower(), robot.backRight.getPower()};
+        return array;
     }
 
     // check for the MOTIF and display it
@@ -142,9 +148,31 @@ public class RobotUtils {
             telemetry.update();
         }
     }
-    public void faceAprilTag() {
-        double maxError = 1;
-//        double difference
+    public void faceAprilTag(double tolerance) {
+        LLResult llResult = robot.limelight.getLatestResult();
+        if (llResult != null && llResult.isValid()) {
+            telemetry.addData("Tx", llResult.getTx());
+            telemetry.addData("Ty", llResult.getTy());
+            telemetry.addData("Ta", llResult.getTa());
+        } else {
+            telemetry.addData("","Nothing is being detected");
+        }
+
+        if (Math.abs(llResult.getTx()) > tolerance) {
+            if (llResult.getTx() > 0) {
+                drive(0, 0.3);
+            } else {
+                drive(0, -0.3);
+            }
+        } else {
+            stopMotors();
+        }
+        telemetry.addData("frontLeft", getMotorPowers()[0]);
+        telemetry.addData("frontRight", getMotorPowers()[1]);
+        telemetry.addData("backLeft", getMotorPowers()[2]);
+        telemetry.addData("backRight", getMotorPowers()[3]);
+        telemetry.addData("wants to stop", Math.abs(llResult.getTx()) < tolerance);
+        telemetry.update();
     }
     public double getHeading() {
         Orientation theta = robot.imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES);

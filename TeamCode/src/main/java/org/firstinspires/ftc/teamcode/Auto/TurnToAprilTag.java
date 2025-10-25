@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Auto;
 
+import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -17,11 +18,13 @@ public class TurnToAprilTag extends LinearOpMode {
         // gets hardware mapping from RobotClass.java
         robot = new RobotClass(hardwareMap);
         utils = new RobotUtils(robot, telemetry);
+        robot.limelight.pipelineSwitch(3);
         robot.imu.resetYaw();
         waitForStart();
         robot.limelight.start();
-//        while (!isStopRequested()) {
-            utils.turnToAngle(90, .3);
-//        }
+
+        while (!isStopRequested()) {
+            utils.faceAprilTag(3);
+        }
     }
 }
