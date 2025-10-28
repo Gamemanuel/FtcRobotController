@@ -23,8 +23,9 @@ public class TurnToAprilTag extends LinearOpMode {
         waitForStart();
         robot.limelight.start();
 
-        while (!isStopRequested()) {
-            utils.faceAprilTag(3);
+        boolean isDone = false;
+        while (!isStopRequested() && !isDone) {
+            isDone = utils.faceAprilTag(3);
         }
     }
 }
