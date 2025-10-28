@@ -22,6 +22,7 @@ public class SixWheel extends OpMode {
     // makes it so I can access the the motors from different children classes
     @SuppressLint("DefaultLocale")
     @Override
+
     public void init() { //when you press "INIT"
         // gets hardware mapping from RobotClass.java
         robot = new RobotClass(hardwareMap);
@@ -32,7 +33,8 @@ public class SixWheel extends OpMode {
     }
     public void start() { //called once at the start when you press play
         robot.limelight.start();
-    }
+    } // executes once when you start the program
+
     public void loop() { //loops as long as the program is running
         utils.drive(gamepad1.left_stick_y, gamepad1.right_stick_x);
         // check for the MOTIF and display it on the driver hub.
