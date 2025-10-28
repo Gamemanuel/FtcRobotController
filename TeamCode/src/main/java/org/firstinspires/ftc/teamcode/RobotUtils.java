@@ -70,8 +70,13 @@ public class RobotUtils {
         stopMotors();
     }
 
-    public double[] getMotorPowers() {
+    public double[] getMotorPowers(boolean disp) {
         double[] array = {robot.frontLeft.getPower(), robot.frontRight.getPower(), robot.backLeft.getPower(), robot.backRight.getPower()};
+        if (disp) {
+            for (int i = 0; i < 5; i++) {
+                telemetry.addData("motor " + i, array[i]);
+            }
+        }
         return array;
     }
 
@@ -124,31 +129,57 @@ public class RobotUtils {
         return MOTIF;
     }
 
-    public void turnToAngle(double targetAngle, double power) throws InterruptedException {
-        boolean finished = false;
-        double maxError = 1;
-        while (!finished && !opMode.isStopRequested()) {
-            double difference = getHeading() - targetAngle;
-            if (difference > 0) {
-                drive(0, power);
-            } else {
-                drive(0, -power);
+    public void turnUntilAngle(double angle) {
+        boolean finish = false;
+        double turnVal = 1;
+        double maxErrorAllowed = .15;
+        double powerReduce = 1;
+        while (!finish) {
+            double angularDistance = Math.min(Math.abs(getHeading() - angle), Math.abs((180 - Math.abs(getHeading())) + (180 - Math.abs(angle))));
+            telemetry.addData("angularDistance", angularDistance);
+            telemetry.addData("currentAngle", getHeading());
+            telemetry.addData("Power", turnVal);
+            telemetry.addData("power reduce", powerReduce);
+            telemetry.addData("isDone", finish);
+            telemetry.update();
+            double currentAngle = getHeading();
+            if (currentAngle < 0) {//if negative
+                currentAngle += 360;
             }
-
-            if (Math.abs(difference) < maxError) {
-                stopMotors();
-                sleep(500);
-                power = 0.25;
-                if (Math.abs(difference) < maxError) {
-                    finished = true;
+            if (currentAngle >= angle) {
+                if ((currentAngle - angle) <= 180) {
+                    //right
+                    turnVal = powerReduce;
+                } else {
+                    //left
+                    turnVal = -powerReduce;
+                }
+            } else {
+                if (angle - currentAngle <= 180) {
+                    //left
+                    turnVal = -powerReduce;
+                } else {
+                    //right
+                    turnVal = powerReduce;
+                }
+            }
+            robot.frontLeft.setPower(turnVal);
+            robot.frontRight.setPower(turnVal);
+            robot.backLeft.setPower(turnVal);
+            robot.backRight.setPower(turnVal);
+            if (angularDistance <= 1) {
+                powerReduce = .8;
+                if (angularDistance <= (maxErrorAllowed)) {
+                    telemetry.addData("isDone", finish);
+                    telemetry.update();
+                    finish = true;
                     stopMotors();
                 }
             }
-            telemetry.addData("difference", difference);
-            telemetry.update();
         }
     }
-    public void faceAprilTag(double tolerance) {
+    public boolean faceAprilTag(double tolerance) {
+        boolean isDone;
         LLResult llResult = robot.limelight.getLatestResult();
         if (llResult != null && llResult.isValid()) {
             telemetry.addData("Tx", llResult.getTx());
@@ -157,22 +188,20 @@ public class RobotUtils {
         } else {
             telemetry.addData("","Nothing is being detected");
         }
-
+        telemetry.addData("wants to stop", Math.abs(llResult.getTx()) < tolerance);
+        telemetry.update();
         if (Math.abs(llResult.getTx()) > tolerance) {
             if (llResult.getTx() > 0) {
                 drive(0, 0.3);
             } else {
                 drive(0, -0.3);
             }
+            isDone = false;
         } else {
             stopMotors();
+            isDone = true;
         }
-        telemetry.addData("frontLeft", getMotorPowers()[0]);
-        telemetry.addData("frontRight", getMotorPowers()[1]);
-        telemetry.addData("backLeft", getMotorPowers()[2]);
-        telemetry.addData("backRight", getMotorPowers()[3]);
-        telemetry.addData("wants to stop", Math.abs(llResult.getTx()) < tolerance);
-        telemetry.update();
+        return isDone;
     }
     public double getHeading() {
         Orientation theta = robot.imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES);
