@@ -12,9 +12,9 @@ import com.qualcomm.hardware.limelightvision.Limelight3A;
 
 public class RobotClass {
     public DcMotorEx frontLeft, frontRight, backRight, backLeft
-//            ,intake1, shooter
+           ,intake1, shooter, liftL, liftR // jank looking for easy commenting out
             ;
-//    public CRServo intake2, intake3, turntable;
+    public CRServo intake2, turntable;
 
     public IMU imu;
 
@@ -31,13 +31,16 @@ public class RobotClass {
         backRight = hardwareMap.get(DcMotorEx.class, "backRight");
 
         // intake
-//        intake1 = hardwareMap.get(DcMotorEx.class, "intake1");
-//        intake2 = hardwareMap.get(CRServo.class, "intake2");
-//        intake3 = hardwareMap.get(CRServo.class, "intake3");
+        intake1 = hardwareMap.get(DcMotorEx.class, "intake1");
+        intake2 = hardwareMap.get(CRServo.class, "intake2");
 
         // extake
-//        turntable = hardwareMap.get(CRServo.class, "turntable");
-//        shooter = hardwareMap.get(DcMotorEx.class, "shooter");
+        turntable = hardwareMap.get(CRServo.class, "turntable");
+        shooter = hardwareMap.get(DcMotorEx.class, "shooter");
+
+        // lift
+        liftL = hardwareMap.get(DcMotorEx.class, "liftL");
+        liftR = hardwareMap.get(DcMotorEx.class, "liftR");
 
         // reverses motors in code so that our code is easier to read
         backRight.setDirection(DcMotorSimple.Direction.REVERSE);

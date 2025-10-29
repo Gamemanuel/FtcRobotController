@@ -18,6 +18,8 @@ public class SixWheel extends OpMode {
     RobotClass robot;
     RobotUtils utils;
     String MOTIF;
+    boolean manual = false;
+    boolean manualatt = false;
 
     // makes it so I can access the the motors from different children classes
     @SuppressLint("DefaultLocale")
@@ -36,8 +38,47 @@ public class SixWheel extends OpMode {
     } // executes once when you start the program
 
     public void loop() { //loops as long as the program is running
+        // driving
         utils.drive(gamepad1.left_stick_y, gamepad1.right_stick_x);
-        // check for the MOTIF and display it on the driver hub.
-        MOTIF = utils.CheckForMotif();
+
+        // lift
+        if (gamepad1.dpad_down) {
+            robot.liftL.setPower(.75);
+            robot.liftR.setPower(.75);
+        } else if (gamepad1.dpad_up) {
+            robot.liftL.setPower(-.75);
+            robot.liftR.setPower(-.75);
+        } else {
+            robot.liftL.setPower(0);
+            robot.liftR.setPower(0);
+        }
+
+        // intake
+        robot.intake1.setPower(gamepad2.left_trigger - gamepad2.right_trigger);
+        if (gamepad2.b) {
+            robot.intake2.setPower(1);
+        } else {
+            robot.intake2.setPower(0);
+        }
+
+        // extake
+        if (gamepad2.back && gamepad2.dpad_left && !manualatt) { // backup in case of limelight break
+            manual = !manual;
+            manualatt = true;
+        } else if (!(gamepad2.back && gamepad2.dpad_left)) { // make sure that it doesn't switch every tick
+            manualatt = false;
+        }
+        if (manual) {
+            if (gamepad2.a) {
+                // shoot from afar
+            }
+            if (gamepad2.x) {
+                // shoot from close
+            }
+            robot.turntable.setPower(gamepad2.left_stick_x);
+        } else {
+            // gamepad2.a -> shoot based on distance using limelight
+            // turntable will automatically rotate because of limelight (utils.faceAprilTag() (currently faces using drivetrain))
+        }
     }
 }

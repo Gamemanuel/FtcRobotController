@@ -179,16 +179,17 @@ public class RobotUtils {
         }
     }
     public boolean faceAprilTag(double tolerance) {
+        robot.limelight.pipelineSwitch(3);
         boolean isDone;
         LLResult llResult = robot.limelight.getLatestResult();
         if (llResult != null && llResult.isValid()) {
             telemetry.addData("Tx", llResult.getTx());
             telemetry.addData("Ty", llResult.getTy());
             telemetry.addData("Ta", llResult.getTa());
+            telemetry.addData("wants to stop", Math.abs(llResult.getTx()) < tolerance);
         } else {
             telemetry.addData("","Nothing is being detected");
         }
-        telemetry.addData("wants to stop", Math.abs(llResult.getTx()) < tolerance);
         telemetry.update();
         if (Math.abs(llResult.getTx()) > tolerance) {
             if (llResult.getTx() > 0) {
