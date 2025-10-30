@@ -40,25 +40,25 @@ public class SixWheel extends OpMode {
         utils.drive(gamepad1.left_stick_y, gamepad1.right_stick_x);
 
         // lift
-        if (gamepad1.left_bumper && gamepad1.right_bumper && !Lmanualatt) {
-            Lmanual = true;
-            Lmanualatt = true;
-        } else if (!(gamepad1.left_bumper && gamepad1.right_bumper)) {
-            Lmanualatt = false;
-        }
-
-        if (Lmanual) {
-            if (gamepad1.dpad_down) {
-                robot.liftL.setPower(.75);
-                robot.liftR.setPower(.75);
-            } else {
-                robot.liftL.setPower(0);
-                robot.liftR.setPower(0);
-            }
-        } else {
-            robot.liftL.setPower(gamepad1.left_trigger);
-            robot.liftR.setPower(gamepad1.right_trigger);
-        }
+//        if (gamepad1.left_bumper && gamepad1.right_bumper && !Lmanualatt) {
+//            Lmanual = true;
+//            Lmanualatt = true;
+//        } else if (!(gamepad1.left_bumper && gamepad1.right_bumper)) {
+//            Lmanualatt = false;
+//        }
+//
+//        if (Lmanual) {
+//            if (gamepad1.dpad_down) {
+//                robot.liftL.setPower(.75);
+//                robot.liftR.setPower(.75);
+//            } else {
+//                robot.liftL.setPower(0);
+//                robot.liftR.setPower(0);
+//            }
+//        } else {
+//            robot.liftL.setPower(gamepad1.left_trigger);
+//            robot.liftR.setPower(gamepad1.right_trigger);
+//        }
 
         // intake
         robot.intake1.setPower(gamepad2.left_trigger - gamepad2.right_trigger);

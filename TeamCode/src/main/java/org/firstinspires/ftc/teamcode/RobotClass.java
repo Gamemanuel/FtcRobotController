@@ -37,8 +37,8 @@ public class RobotClass {
         shooter = hardwareMap.get(DcMotorEx.class, "shooter");
 
         // lift
-        liftL = hardwareMap.get(DcMotorEx.class, "liftL");
-        liftR = hardwareMap.get(DcMotorEx.class, "liftR");
+//        liftL = hardwareMap.get(DcMotorEx.class, "liftL");
+//        liftR = hardwareMap.get(DcMotorEx.class, "liftR");
 
         // reverses motors in code so that our code is easier to read
         backRight.setDirection(DcMotorSimple.Direction.REVERSE);
