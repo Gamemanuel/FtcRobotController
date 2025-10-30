@@ -1,15 +1,10 @@
 package org.firstinspires.ftc.teamcode.DriverControl;
 
 import android.annotation.SuppressLint;
-
-import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.RobotClass;
 import org.firstinspires.ftc.teamcode.RobotUtils;
-
-import java.util.List;
-import java.util.Objects;
 
 // adds to list of teleop programs as SixWheelDrive
 @TeleOp(name = "SixWheelDrive", group = "driving")
@@ -37,7 +32,8 @@ public class SixWheel extends OpMode {
         robot.limelight.start();
     } // executes once when you start the program
 
-    public void loop() { //loops as long as the program is running
+    // loops as long as the program is running
+    public void loop() {
         // driving
         utils.drive(gamepad1.left_stick_y, gamepad1.right_stick_x);
 
