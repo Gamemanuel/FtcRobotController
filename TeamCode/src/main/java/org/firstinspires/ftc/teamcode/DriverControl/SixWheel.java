@@ -13,8 +13,10 @@ public class SixWheel extends OpMode {
     RobotClass robot;
     RobotUtils utils;
     String MOTIF;
-    boolean manual = false;
-    boolean manualatt = false;
+    boolean Smanual = false;
+    boolean Smanualatt = false;
+    boolean Lmanual = false;
+    boolean Lmanualatt = false;
 
     // makes it so I can access the the motors from different children classes
     @SuppressLint("DefaultLocale")
@@ -38,15 +40,24 @@ public class SixWheel extends OpMode {
         utils.drive(gamepad1.left_stick_y, gamepad1.right_stick_x);
 
         // lift
-        if (gamepad1.dpad_down) {
-            robot.liftL.setPower(.75);
-            robot.liftR.setPower(.75);
-        } else if (gamepad1.dpad_up) {
-            robot.liftL.setPower(-.75);
-            robot.liftR.setPower(-.75);
+        if (gamepad1.left_bumper && gamepad1.right_bumper && !Lmanualatt) {
+            Lmanual = true;
+            Lmanualatt = true;
+        } else if (!(gamepad1.left_bumper && gamepad1.right_bumper)) {
+            Lmanualatt = false;
+        }
+
+        if (Lmanual) {
+            if (gamepad1.dpad_down) {
+                robot.liftL.setPower(.75);
+                robot.liftR.setPower(.75);
+            } else {
+                robot.liftL.setPower(0);
+                robot.liftR.setPower(0);
+            }
         } else {
-            robot.liftL.setPower(0);
-            robot.liftR.setPower(0);
+            robot.liftL.setPower(gamepad1.left_trigger);
+            robot.liftR.setPower(gamepad1.right_trigger);
         }
 
         // intake
@@ -58,13 +69,13 @@ public class SixWheel extends OpMode {
         }
 
         // extake
-        if (gamepad2.back && gamepad2.dpad_left && !manualatt) { // backup in case of limelight break
-            manual = !manual;
-            manualatt = true;
+        if (gamepad2.back && gamepad2.dpad_left && !Smanualatt) { // backup in case of limelight break
+            Smanual = !Smanual;
+            Smanualatt = true;
         } else if (!(gamepad2.back && gamepad2.dpad_left)) { // make sure that it doesn't switch every tick
-            manualatt = false;
+            Smanualatt = false;
         }
-        if (manual) {
+        if (Smanual) {
             if (gamepad2.a) {
                 // shoot from afar
             }
