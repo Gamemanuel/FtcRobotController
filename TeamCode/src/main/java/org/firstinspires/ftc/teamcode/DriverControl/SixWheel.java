@@ -37,7 +37,7 @@ public class SixWheel extends OpMode {
     // loops as long as the program is running
     public void loop() {
         // driving
-        utils.drive(gamepad1.left_stick_y, gamepad1.right_stick_x);
+        utils.drive(-gamepad1.left_stick_y, gamepad1.right_stick_x);
 
         // lift
 //        if (gamepad1.left_bumper && gamepad1.right_bumper && !Lmanualatt) {
@@ -62,17 +62,15 @@ public class SixWheel extends OpMode {
 
         // intake
         robot.intake1.setPower(gamepad2.left_trigger - gamepad2.right_trigger);
-        if (gamepad2.b) {
-            robot.intake2.setPower(1);
-        } else {
-            robot.intake2.setPower(0);
-        }
-
+//        TODO:// make the intake act as a toggle for the flipper
+        robot.intake2.setPosition(-gamepad2.left_stick_y);
+//        robot.intake2.setPower(gamepad2.left_stick_x);
+        robot.shooter.setPower(gamepad2.right_stick_y);
         // extake
         if (gamepad2.back && gamepad2.dpad_left && !Smanualatt) { // backup in case of limelight break
             Smanual = !Smanual;
             Smanualatt = true;
-        } else if (!(gamepad2.back && gamepad2.dpad_left)) { // make sure that it doesn't switch every tick
+        } else if (!(gamepad2.back && gamepad2.dpad_left)) { // make sure that it doesn't switch every tic0k
             Smanualatt = false;
         }
         if (Smanual) {
