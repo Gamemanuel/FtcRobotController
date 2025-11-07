@@ -1,8 +1,10 @@
 package org.firstinspires.ftc.teamcode.DriverControl;
 
 import android.annotation.SuppressLint;
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
 import org.firstinspires.ftc.teamcode.RobotClass;
 import org.firstinspires.ftc.teamcode.RobotUtils;
 
@@ -32,6 +34,7 @@ public class SixWheel extends OpMode {
         // you must initialize this object otherwise it thinks that the function is static and the function errors  .
         utils = new RobotUtils(robot, telemetry);
     }
+
     public void start() { //called once at the start when you press play
         robot.limelight.start();
     } // executes once when you start the program
@@ -85,26 +88,23 @@ public class SixWheel extends OpMode {
         } else {
             // gamepad2.a -> shoot based on distance using limelight
             // turntable will automatically rotate because of limelight
-            aprilTagTracking(3,.75);
+            aprilTagTracking(3, .75);
 
         }
 //        utils.CheckForMotif();
     }
-        public void aprilTagTracking(double tolerance, double speed) {
-            if (gamepad2.left_bumper || gamepad2.right_bumper) {
-                double turntablePower = 0;
-                if (gamepad2.left_bumper) {
-                    turntablePower = speed;
-                }
-                else if (gamepad2.right_bumper) {
-                    turntablePower = -speed;
-                }
-                robot.turntable.setPower(turntablePower);
-            } else {
-                utils.faceAprilTag(tolerance, speed);
+
+    public void aprilTagTracking(double tolerance, double speed) {
+        if (gamepad2.left_bumper || gamepad2.right_bumper) {
+            double turntablePower = 0;
+            if (gamepad2.left_bumper) {
+                turntablePower = speed;
+            } else if (gamepad2.right_bumper) {
+                turntablePower = -speed;
             }
+            robot.turntable.setPower(turntablePower);
+        } else {
+            utils.faceAprilTag(tolerance, speed);
         }
-
-
+    }
 }
-
