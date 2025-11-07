@@ -65,14 +65,13 @@ public class SixWheel extends OpMode {
         // intake
         robot.intake1.setPower(gamepad2.left_trigger - gamepad2.right_trigger);
 //        TODO:// make the intake act as a toggle for the flipper
-        robot.intake2.setPosition(-gamepad2.left_stick_y);
-//        robot.intake2.setPower(gamepad2.left_stick_x);
+        robot.intake2.setPosition(-gamepad2.left_stick_y * 0.75);
         robot.shooter.setPower(gamepad2.right_stick_y);
         // extake
         if (gamepad2.back && gamepad2.dpad_left && !Smanualatt) { // backup in case of limelight break
             Smanual = !Smanual;
             Smanualatt = true;
-        } else if (!(gamepad2.back && gamepad2.dpad_left)) { // make sure that it doesn't switch every tic0k
+        } else if (!(gamepad2.back && gamepad2.dpad_left)) { // make sure that it doesn't switch every tick
             Smanualatt = false;
         }
         if (Smanual) {
