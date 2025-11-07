@@ -18,6 +18,8 @@ public class SixWheel extends OpMode {
     boolean Lmanual = false;
     boolean Lmanualatt = false;
 
+    private double distance;
+
     // makes it so I can access the the motors from different children classes
     @SuppressLint("DefaultLocale")
     @Override
@@ -83,7 +85,9 @@ public class SixWheel extends OpMode {
             robot.turntable.setPower(gamepad2.left_stick_x);
         } else {
             // gamepad2.a -> shoot based on distance using limelight
-            // turntable will automatically rotate because of limelight (utils.faceAprilTag() (currently faces using drivetrain))
+            // turntable will automatically rotate because of limelight
+            utils.faceAprilTag(3, 1);
         }
+//        utils.CheckForMotif();
     }
 }

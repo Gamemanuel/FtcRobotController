@@ -15,14 +15,13 @@ public class TurnToAprilTag extends LinearOpMode {
         // gets hardware mapping from RobotClass.java
         robot = new RobotClass(hardwareMap);
         utils = new RobotUtils(robot, telemetry);
-        robot.imu.resetYaw();
         waitForStart();
         robot.limelight.start();
 
-        boolean isDone = false;
-        while (!isStopRequested() && !isDone) {
-            isDone = utils.faceAprilTag(3);
-            utils.getMotorPowers(true);
-        }
+//        boolean isDone = false;
+//        while (!isStopRequested() && !isDone) {
+//            isDone = utils.faceAprilTag(3);
+//            utils.getMotorPowers(true);
+//        }
     }
 }

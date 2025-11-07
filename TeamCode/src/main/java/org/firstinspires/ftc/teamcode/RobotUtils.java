@@ -172,31 +172,30 @@ public class RobotUtils {
             }
         }
     }
-    public boolean faceAprilTag(double tolerance) {
+    public void faceAprilTag(double tolerance, double speed) {
         robot.limelight.pipelineSwitch(3);
-        boolean isDone;
         LLResult llResult = robot.limelight.getLatestResult();
         if (llResult != null && llResult.isValid()) {
+            double tx = llResult.getTx() + 5; // offset correction
             telemetry.addData("Tx", llResult.getTx());
+            telemetry.addData("Tx with offset", tx);
             telemetry.addData("Ty", llResult.getTy());
             telemetry.addData("Ta", llResult.getTa());
-            telemetry.addData("wants to stop", Math.abs(llResult.getTx()) < tolerance);
+            telemetry.addData("wants to stop", Math.abs(tx) < tolerance);
+            if (Math.abs(tx) > tolerance) {
+                if (tx > 0) {
+                    robot.turntable.setPower(-speed);
+                } else {
+                    robot.turntable.setPower(speed);
+                }
+            } else {
+                robot.turntable.setPower(0);
+            }
         } else {
             telemetry.addData("","Nothing is being detected");
+            robot.turntable.setPower(0);
         }
         telemetry.update();
-        if (Math.abs(llResult.getTx()) > tolerance) {
-            if (llResult.getTx() > 0) {
-                drive(0, 0.3);
-            } else {
-                drive(0, -0.3);
-            }
-            isDone = false;
-        } else {
-            stopMotors();
-            isDone = true;
-        }
-        return isDone;
     }
     public double getHeading() {
         Orientation theta = robot.imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES);
