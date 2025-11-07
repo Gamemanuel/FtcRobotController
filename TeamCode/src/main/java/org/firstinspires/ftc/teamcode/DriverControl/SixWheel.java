@@ -85,8 +85,27 @@ public class SixWheel extends OpMode {
         } else {
             // gamepad2.a -> shoot based on distance using limelight
             // turntable will automatically rotate because of limelight
-            utils.faceAprilTag(3, 1);
+            aprilTagTracking(3,.75);
+
         }
 //        utils.CheckForMotif();
     }
+        public void aprilTagTracking(double tolerance, double speed) {
+            if (gamepad2.left_bumper || gamepad2.right_bumper) {
+//            TODO make the bumpers controll the movement of the turntable
+                double turntablePower = 0;
+                if (gamepad2.left_bumper) {
+                    turntablePower = speed;
+                }
+                else if (gamepad2.right_bumper) {
+                    turntablePower = -speed;
+                }
+                robot.turntable.setPower(turntablePower);
+            } else {
+                utils.faceAprilTag(tolerance, speed);
+            }
+        }
+
+
 }
+

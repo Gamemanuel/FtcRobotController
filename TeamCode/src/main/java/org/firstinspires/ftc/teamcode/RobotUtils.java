@@ -178,45 +178,35 @@ public class RobotUtils {
     }
 
     public void faceAprilTag(double tolerance, double speed) {
-        if (gamepad2.left_bumper || gamepad2.right_bumper) {
-//            TODO make the bumpers controll the movement of the turntable
-            double turntablePower = 0;
-            if (gamepad2.left_bumper) {
-                turntablePower = speed;
-            }
-            else if (gamepad2.right_bumper) {
-                turntablePower = -speed;
-            }
-            robot.turntable.setPower(turntablePower);
-        } else {
-            robot.limelight.pipelineSwitch(3);
-            LLResult llResult = robot.limelight.getLatestResult();
-            if (llResult != null && llResult.isValid()) {
-                double tx = llResult.getTx() + 5; // offset correction
-                telemetry.addData("Tx", llResult.getTx());
-                telemetry.addData("Tx with offset", tx);
-                telemetry.addData("Ty", llResult.getTy());
-                telemetry.addData("Ta", llResult.getTa());
-                telemetry.addData("wants to stop", Math.abs(tx) < tolerance);
-                if (Math.abs(tx) > tolerance) {
-                    if (tx > 0) {
-                        robot.turntable.setPower(-speed);
-                    } else {
-                        robot.turntable.setPower(speed);
-                    }
+        robot.limelight.pipelineSwitch(3);
+        LLResult llResult = robot.limelight.getLatestResult();
+        if (llResult != null && llResult.isValid()) {
+            double tx = llResult.getTx() + 5; // offset correction
+            telemetry.addData("Tx", llResult.getTx());
+            telemetry.addData("Tx with offset", tx);
+            telemetry.addData("Ty", llResult.getTy());
+            telemetry.addData("Ta", llResult.getTa());
+            telemetry.addData("wants to stop", Math.abs(tx) < tolerance);
+            if (Math.abs(tx) > tolerance) {
+                if (tx > 0) {
+                    // negative is right
+                    robot.turntable.setPower(-speed);
                 } else {
-                    robot.turntable.setPower(0);
+                    robot.turntable.setPower(speed);
                 }
             } else {
-                telemetry.addData("", "Nothing is being detected");
                 robot.turntable.setPower(0);
             }
-            telemetry.update();
+        } else {
+            telemetry.addData("", "Nothing is being detected");
+            robot.turntable.setPower(0);
         }
+        telemetry.update();
     }
 
-    public double getHeading() {
-        Orientation theta = robot.imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES);
-        return theta.thirdAngle;
-    }
+
+public double getHeading() {
+    Orientation theta = robot.imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES);
+    return theta.thirdAngle;
+}
 }
