@@ -92,7 +92,6 @@ public class SixWheel extends OpMode {
     }
         public void aprilTagTracking(double tolerance, double speed) {
             if (gamepad2.left_bumper || gamepad2.right_bumper) {
-//            TODO make the bumpers controll the movement of the turntable
                 double turntablePower = 0;
                 if (gamepad2.left_bumper) {
                     turntablePower = speed;
