@@ -1,10 +1,8 @@
 package org.firstinspires.ftc.teamcode.DriverControl;
 
 import android.annotation.SuppressLint;
-
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-
 import org.firstinspires.ftc.teamcode.RobotClass;
 import org.firstinspires.ftc.teamcode.RobotUtils;
 
@@ -65,6 +63,9 @@ public class SixWheel extends OpMode {
 //            robot.liftR.setPower(gamepad1.right_trigger);
 //        }
 
+        // TODO: Time to clean up this code:
+
+
         // intake
         robot.intake1.setPower(gamepad2.left_trigger - gamepad2.right_trigger);
         robot.intake2.setPosition(-gamepad2.left_stick_y * 0.75);
@@ -94,6 +95,27 @@ public class SixWheel extends OpMode {
         // utils.CheckForMotif();
     }
 
+    /**
+     The function aprilTagTracking has 2 inputs:
+         <ul>
+             <li>
+                double tolerance: tolerance is used to define how precise you want the aiming to be
+                note that a lower tolerance does mean a more accurate target but in order to reduce oscillation,
+                you are also going to need to lower the speed otherwise you will get a lot of oscillation.
+             </li>
+             <li>
+                double speed: speed is how fast the tracking happens. here it is how fast the turntable is
+                going to be going and how fast it can turn.
+             </li>
+         </ul>
+     This function is a manuel override wrapper for the function faceAprilTag in the utils library
+     and it allows the driver2 (Madelyn) to override the tracking of the april tag to make sure that
+     we can control the robot if the robot goes haywire.
+
+     * @author Gavin Rappleye & william Finch
+     * @version 1
+
+     */
     public void aprilTagTracking(double tolerance, double speed) {
         // If the bumpers on Madelyn's controller are pressed we override the regular
         // limelight code for auto tracking
