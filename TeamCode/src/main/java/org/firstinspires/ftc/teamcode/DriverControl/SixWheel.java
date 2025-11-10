@@ -58,14 +58,14 @@ public class SixWheel extends OpMode {
         utils.drive(-gamepad1.left_stick_y, gamepad1.right_stick_x);
 
         // lift
-//        if (gamepad1.left_bumper && gamepad1.right_bumper && !Lmanualatt) {
-//            Lmanual = true;
-//            Lmanualatt = true;
-//        } else if (!(gamepad1.left_bumper && gamepad1.right_bumper)) {
+//        if (gamepad1.left_bumper && gamepad1.right_bumper && !Lmanualatt) { // check if button combo is pressed and wasn't already pressed before
+//            Lmanual = true; // toggle manual mode for lift
+//            Lmanualatt = true; // you just attempted to button combo (whether you meant to or not)
+//        } else if (!(gamepad1.left_bumper && gamepad1.right_bumper)) { // make sure that it doesn't switch every tick
 //            Lmanualatt = false;
 //        }
 //
-//        if (Lmanual) {
+//        if (Lmanual) { // if manual mode
 //            if (gamepad1.dpad_down) {
 //                robot.liftL.setPower(.75);
 //                robot.liftR.setPower(.75);
@@ -73,7 +73,7 @@ public class SixWheel extends OpMode {
 //                robot.liftL.setPower(0);
 //                robot.liftR.setPower(0);
 //            }
-//        } else {
+//        } else { // if not manual mode
 //            robot.liftL.setPower(gamepad1.left_trigger);
 //            robot.liftR.setPower(gamepad1.right_trigger);
 //        }
@@ -87,13 +87,13 @@ public class SixWheel extends OpMode {
         robot.shooter.setPower(gamepad2.right_stick_y);
 
         // extake
-        if (gamepad2.back && gamepad2.dpad_left && !Smanualatt) { // backup in case of limelight break
-            Smanual = !Smanual;
-            Smanualatt = true;
+        if (gamepad2.back && gamepad2.dpad_left && !Smanualatt) { // check if button combo is pressed and wasn't already pressed before
+            Smanual = !Smanual; // toggle manual mode for shooter
+            Smanualatt = true; // you just attempted to button combo (whether you meant to or not)
         } else if (!(gamepad2.back && gamepad2.dpad_left)) { // make sure that it doesn't switch every tick
             Smanualatt = false;
         }
-        if (Smanual) {
+        if (Smanual) { // is it manual mode
             if (gamepad2.a) {
                 // shoot from afar
             }
@@ -101,7 +101,7 @@ public class SixWheel extends OpMode {
                 // shoot from close
             }
             robot.turntable.setPower(gamepad2.left_stick_x);
-        } else {
+        } else { // is it automatic mode
             // gamepad2.a -> shoot based on distance using limelight
             // turntable will automatically rotate because of limelight
             aprilTagTracking(3, .75);
