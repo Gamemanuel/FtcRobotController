@@ -228,4 +228,11 @@ public class RobotUtils {
         Orientation theta = robot.imu.getRobotOrientation(AxesReference.INTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES);
         return theta.thirdAngle;
     }
+
+    /**
+     Returns the average encoder measurement between all motors
+     */
+    public double getEncoderPos() {
+        return Math.round((robot.backRight.getCurrentPosition() + robot.backLeft.getCurrentPosition() + robot.frontRight.getCurrentPosition() + robot.frontLeft.getCurrentPosition()) / 4);
+    }
 }

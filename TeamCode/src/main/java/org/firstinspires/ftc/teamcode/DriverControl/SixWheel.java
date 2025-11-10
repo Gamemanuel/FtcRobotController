@@ -78,9 +78,6 @@ public class SixWheel extends OpMode {
 //            robot.liftR.setPower(gamepad1.right_trigger);
 //        }
 
-        // TODO: Time to clean up this code:
-
-
         // intake
         robot.intake1.setPower(gamepad2.left_trigger - gamepad2.right_trigger);
         robot.intake2.setPosition(-gamepad2.left_stick_y * 0.75);
