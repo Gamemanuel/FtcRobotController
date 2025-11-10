@@ -19,7 +19,7 @@ public class TestAndConfigureMotorOrientation extends LinearOpMode {
 
         // This Creates A new Utils object. it thinks that the robot is null but that is because it has not been created yet.
         // you must initialize this object otherwise it thinks that the function is static and the function errors.
-        RobotUtils utils = new RobotUtils(robot, telemetry);
+        RobotUtils utils = new RobotUtils(robot, telemetry, this, null, null);
 
         // makes the play button appear and is required for competition
         waitForStart();

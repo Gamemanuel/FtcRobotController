@@ -16,7 +16,7 @@ public class LeaveTheLine extends LinearOpMode {
         // gets hardware mapping from RobotClass.java
         robot = new RobotClass(hardwareMap);
         // we Use "this" to pass in the opMode
-        utils = new RobotUtils(robot, telemetry, this);
+        utils = new RobotUtils(robot, telemetry, this, null, null);
 
         // waits for you to push the start button
         waitForStart();

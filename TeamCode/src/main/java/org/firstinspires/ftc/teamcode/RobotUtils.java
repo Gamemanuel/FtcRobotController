@@ -8,27 +8,50 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import com.qualcomm.robotcore.hardware.Gamepad;
 
 import java.util.List;
 
 public class RobotUtils {
-    private RobotClass robot;
-    private Telemetry telemetry;
-    private LinearOpMode opMode;
+    private final RobotClass robot;
+    private final Telemetry telemetry;
+    private final LinearOpMode opMode;
+    private final Gamepad operatorGamepad;
     boolean isMotifDecoded = false;
 
     String MOTIF = "";
 
-    // Constructor for TeleOp (no opMode needed)
-    public RobotUtils(RobotClass robot, Telemetry telemetry) {
+    private final Gamepad driverGamepad;
+    private final Gamepad currentDriverGamepadState = new Gamepad();
+
+    // Single constructor for all OpModes
+    public RobotUtils(RobotClass robot, Telemetry telemetry, LinearOpMode opMode, Gamepad driverGamepad, Gamepad operatorGamepad) {
         this.robot = robot;
         this.telemetry = telemetry;
+        this.opMode = opMode;
+        this.driverGamepad = driverGamepad;
+        this.operatorGamepad = operatorGamepad;
     }
 
-    // Constructor for Auto (opMode needed for opModeIsActive)
-    public RobotUtils(RobotClass robot, Telemetry telemetry, LinearOpMode opMode) {
-        this(robot, telemetry);
-        this.opMode = opMode;
+    // Call this in every loop of your OpMode to sync the gamepad state
+    public void updateGamepadState() {
+        // Use the new field name
+        if (driverGamepad != null) {
+            currentDriverGamepadState.copy(driverGamepad);
+        }
+        if (driverGamepad != null) {
+            currentDriverGamepadState.copy(driverGamepad);
+        }
+    }
+
+    // An optional method to handle the full drive loop logic
+    public void handleDriverDriving() {
+        // Get input from the current state (which is updated in the loop)
+        double forward = -currentDriverGamepadState.left_stick_y;
+        double turn = currentDriverGamepadState.right_stick_x;
+
+        // Pass these values to the core drive method
+        drive(forward, turn);
     }
 
     public void drive(double forward, double turn) {

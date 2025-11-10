@@ -12,7 +12,7 @@ public class encoderTestAuto extends LinearOpMode {
     @Override
     public void runOpMode() {
         robot = new RobotClass(hardwareMap);
-        utils = new RobotUtils(robot, telemetry, this);
+        utils = new RobotUtils(robot, telemetry, this, null, null);
 
         waitForStart();
 

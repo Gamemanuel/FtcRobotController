@@ -30,7 +30,11 @@ public class SixWheel extends OpMode {
 
         // This Creates A new Utils object. it thinks that the robot is null but that is because it has not been created yet.
         // you must initialize this object otherwise it thinks that the function is static and the function errors  .
-        utils = new RobotUtils(robot, telemetry);
+        utils = new RobotUtils(robot, telemetry, null, gamepad1, gamepad2);
+
+        // Optional: Add telemetry if needed
+        telemetry.addData("Status", "Initialized");
+        telemetry.update();
     }
 
     public void start() { //called once at the start when you press play
@@ -39,6 +43,17 @@ public class SixWheel extends OpMode {
 
     // loops as long as the program is running
     public void loop() {
+
+        // --- MAIN LOOP ---
+
+        // 1. Update the utility class's internal gamepad state
+        utils.updateGamepadState();
+
+        // --- END MAIN LOOP ---
+
+        telemetry.addData("Left Stick Y", gamepad1.left_stick_y);
+        telemetry.update();
+
         // driving
         utils.drive(-gamepad1.left_stick_y, gamepad1.right_stick_x);
 
