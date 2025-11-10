@@ -28,7 +28,7 @@ public class EncoderAuto extends LinearOpMode {
         robot.backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         waitForStart();
-        drive(24);
+        drive(2);
     }
 
     private void drive(double inches) {
@@ -38,6 +38,11 @@ public class EncoderAuto extends LinearOpMode {
         robot.frontRight.setTargetPosition(ticks);
         robot.backLeft.setTargetPosition(ticks);
         robot.backRight.setTargetPosition(ticks);
+
+        robot.frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        robot.frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        robot.backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        robot.backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         robot.frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);

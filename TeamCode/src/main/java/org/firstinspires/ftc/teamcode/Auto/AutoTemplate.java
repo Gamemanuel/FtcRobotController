@@ -5,10 +5,12 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.RobotClass;
 import org.firstinspires.ftc.teamcode.RobotUtils;
 
-@Autonomous(name="LeaveTheLine")
+// This is commented out because we do not want it to show up in the driver control panel yet.
+// @Autonomous(name="AutonomousName")
 public class AutoTemplate extends LinearOpMode {
     RobotClass robot;
     RobotUtils utils;
+
     @Override
     public void runOpMode() {
         robot = new RobotClass(hardwareMap);
@@ -17,7 +19,7 @@ public class AutoTemplate extends LinearOpMode {
         waitForStart();
 
         if (opModeIsActive()) {
-            // insert code here
+            // insert auto code here
         }
     }
 }

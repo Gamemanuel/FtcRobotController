@@ -67,9 +67,9 @@ public class SixWheel extends OpMode {
 
         // intake
         robot.intake1.setPower(gamepad2.left_trigger - gamepad2.right_trigger);
-//        TODO:// make the intake act as a toggle for the flipper
         robot.intake2.setPosition(-gamepad2.left_stick_y * 0.75);
         robot.shooter.setPower(gamepad2.right_stick_y);
+
         // extake
         if (gamepad2.back && gamepad2.dpad_left && !Smanualatt) { // backup in case of limelight break
             Smanual = !Smanual;
@@ -91,10 +91,12 @@ public class SixWheel extends OpMode {
             aprilTagTracking(3, .75);
 
         }
-//        utils.CheckForMotif();
+        // utils.CheckForMotif();
     }
 
     public void aprilTagTracking(double tolerance, double speed) {
+        // If the bumpers on Madelyn's controller are pressed we override the regular
+        // limelight code for auto tracking
         if (gamepad2.left_bumper || gamepad2.right_bumper) {
             double turntablePower = 0;
             if (gamepad2.left_bumper) {
@@ -103,6 +105,8 @@ public class SixWheel extends OpMode {
                 turntablePower = -speed;
             }
             robot.turntable.setPower(turntablePower);
+        // If the bumpers on Madelyn's controller are not pressed then let the limelight
+        // handel the auto targeting code based on the utils function
         } else {
             utils.faceAprilTag(tolerance, speed);
         }
