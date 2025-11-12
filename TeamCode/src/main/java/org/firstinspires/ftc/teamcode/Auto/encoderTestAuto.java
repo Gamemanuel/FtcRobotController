@@ -17,13 +17,13 @@ public class encoderTestAuto extends LinearOpMode {
         waitForStart();
 
         if (opModeIsActive()) {
-            while (true) {
+            while (!isStopRequested()) {
                 double CPR = 2;
 
                 // Get the current position of the motor
-                int position = robot.backRight.getCurrentPosition();
-                double revolutions = position / CPR;
+                double position = utils.getEncoderPos();
 
+                double revolutions = position / CPR;
                 double angle = revolutions * 360;
                 double angleNormalized = angle % 360;
 
