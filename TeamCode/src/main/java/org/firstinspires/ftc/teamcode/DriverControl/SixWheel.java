@@ -81,7 +81,7 @@ public class SixWheel extends OpMode {
         // intake
         robot.intake1.setPower(gamepad2.left_trigger - gamepad2.right_trigger);
         robot.intake2.setPosition(-gamepad2.left_stick_y * 0.75);
-        robot.shooter.setPower(gamepad2.right_stick_y);
+        robot.shooter.setPower(-gamepad2.right_stick_y);
 
         // extake
         if (gamepad2.back && gamepad2.dpad_left && !Smanualatt) { // check if button combo is pressed and wasn't already pressed before

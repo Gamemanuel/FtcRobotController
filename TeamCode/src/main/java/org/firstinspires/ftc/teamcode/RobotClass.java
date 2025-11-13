@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -47,12 +48,27 @@ public class RobotClass {
 
         // limelight
         limelight = hardwareMap.get(Limelight3A.class, "limelight");
+        // switching to the default pipeline
+        limelight.pipelineSwitch(0);
 
         // The code below this is for the encoder control SUBJECT TO CHANGE WITHOUT NOTICE!
         // Reset the motor encoder so that it reads zero ticks
         backRight.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        backLeft.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeft.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        frontRight.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
 
         // Turn the motor back on, required if you use STOP_AND_RESET_ENCODER
         backRight.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+
+        // Retrieve the IMU from the hardware map
+        IMU imu = hardwareMap.get(IMU.class, "imu");
+        // Adjust the orientation parameters to match your robot
+        IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
+                // hey bru, this website is really helpful for configuring this: https://ftc-docs.firstinspires.org/en/latest/programming_resources/imu/imu.html
+                RevHubOrientationOnRobot.LogoFacingDirection.LEFT,
+                RevHubOrientationOnRobot.UsbFacingDirection.UP));
+        // Without this, the REV Hub's orientation is assumed to be logo up / USB forward
+        imu.initialize(parameters);
     }
 }
