@@ -53,10 +53,7 @@ public class RobotClass {
 
         // The code below this is for the encoder control SUBJECT TO CHANGE WITHOUT NOTICE!
         // Reset the motor encoder so that it reads zero ticks
-        backRight.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-        backLeft.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-        frontLeft.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
-        frontRight.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+
 
 
 

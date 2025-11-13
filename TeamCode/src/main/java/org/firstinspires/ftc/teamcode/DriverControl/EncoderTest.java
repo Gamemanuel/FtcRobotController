@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.DriverControl;
 
-
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -20,6 +19,12 @@ public class EncoderTest extends OpMode {
     }
 
     public void start() {
+        // set the drive to encoder drive
+        robot.backRight.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        robot.backLeft.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        robot.frontLeft.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        robot.frontRight.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+
         // set the initial position target:
         robot.backRight.setTargetPosition(5500);
         robot.backLeft.setTargetPosition(5500);
@@ -41,11 +46,9 @@ public class EncoderTest extends OpMode {
 
     public void loop() {
         // Start the motor moving by setting the max velocity to 200 ticks per second
-        // While the Op Mode is running, show the motor's status via telemetry
         telemetry.addData("velocity", robot.frontRight.getVelocity());
         telemetry.addData("position", robot.frontRight.getCurrentPosition());
         telemetry.addData("is at target", !robot.frontRight.isBusy());
         telemetry.update();
     }
-
 }

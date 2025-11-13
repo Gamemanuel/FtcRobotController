@@ -43,15 +43,9 @@ public class SixWheel extends OpMode {
 
     // loops as long as the program is running
     public void loop() {
-
-        // --- MAIN LOOP ---
-
         // 1. Update the utility class's internal gamepad state
         utils.updateGamepadState();
 
-        // --- END MAIN LOOP ---
-
-        telemetry.addData("Left Stick Y", gamepad1.left_stick_y);
         telemetry.update();
 
         // driving
