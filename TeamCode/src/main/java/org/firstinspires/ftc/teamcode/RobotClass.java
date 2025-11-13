@@ -58,8 +58,7 @@ public class RobotClass {
         frontLeft.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
         frontRight.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
 
-        // Turn the motor back on, required if you use STOP_AND_RESET_ENCODER
-        backRight.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
+
 
         // Retrieve the IMU from the hardware map
         IMU imu = hardwareMap.get(IMU.class, "imu");
