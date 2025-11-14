@@ -37,6 +37,7 @@ public class RobotClass {
         // extake
         turntable = hardwareMap.get(CRServo.class, "turntable");
         shooter = hardwareMap.get(DcMotorEx.class, "shooter");
+//        shooter.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // lift This is commented out because the lift is not on the robot
         // liftL = hardwareMap.get(DcMotorEx.class, "liftL");
@@ -50,12 +51,6 @@ public class RobotClass {
         limelight = hardwareMap.get(Limelight3A.class, "limelight");
         // switching to the default pipeline
         limelight.pipelineSwitch(0);
-
-        // The code below this is for the encoder control SUBJECT TO CHANGE WITHOUT NOTICE!
-        // Reset the motor encoder so that it reads zero ticks
-
-
-
 
         // Retrieve the IMU from the hardware map
         IMU imu = hardwareMap.get(IMU.class, "imu");
