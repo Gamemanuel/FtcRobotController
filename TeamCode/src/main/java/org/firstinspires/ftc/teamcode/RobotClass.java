@@ -37,7 +37,7 @@ public class RobotClass {
         // extake
         turntable = hardwareMap.get(CRServo.class, "turntable");
         shooter = hardwareMap.get(DcMotorEx.class, "shooter");
-//        shooter.setDirection(DcMotorSimple.Direction.REVERSE);
+        shooter.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // lift This is commented out because the lift is not on the robot
         // liftL = hardwareMap.get(DcMotorEx.class, "liftL");

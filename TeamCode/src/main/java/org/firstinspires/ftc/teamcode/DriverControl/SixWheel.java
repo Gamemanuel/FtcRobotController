@@ -47,8 +47,8 @@ public class SixWheel extends OpMode {
     //called once at the start when you press play
     public void start() {
         robot.limelight.start();
-        robot.shooter.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-        robot.shooter.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+//        robot.shooter.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+//        robot.shooter.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
     } // executes once when you start the program
 
     // loops as long as the program is running
@@ -85,8 +85,9 @@ public class SixWheel extends OpMode {
         // intake
         robot.intake1.setPower(gamepad2.left_trigger - gamepad2.right_trigger);
         robot.intake2.setPosition(-gamepad2.left_stick_y * 0.75);
-        int TargetVelocityInTPS = (int)((5000/60) * COUNTS_PER_MOTOR_REV);
-        robot.shooter.setVelocity(TargetVelocityInTPS);
+//        int TargetVelocityInTPS = (int)((5000/60) * COUNTS_PER_MOTOR_REV);
+//        robot.shooter.setVelocity(TargetVelocityInTPS);
+        robot.shooter.setPower(gamepad2.right_stick_y);
 
         // extake
         if (gamepad2.back && gamepad2.dpad_left && !Smanualatt) { // check if button combo is pressed and wasn't already pressed before
@@ -110,10 +111,10 @@ public class SixWheel extends OpMode {
 
         }
         // utils.CheckForMotif();
-        telemetry.speak("ding");
-        sleep(2000);
-        telemetry.addData("shooterVelocity", robot.shooter.getVelocity());
-        telemetry.update();
+//        telemetry.speak("ding");
+//        sleep(2000);
+//        telemetry.addData("shooterVelocity", robot.shooter.getVelocity());
+//        telemetry.update();
     }
 
     /**
