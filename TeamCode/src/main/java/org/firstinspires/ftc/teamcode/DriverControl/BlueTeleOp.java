@@ -13,14 +13,14 @@ import org.firstinspires.ftc.teamcode.RobotUtils;
 
 // adds to list of teleop programs as SixWheelDrive
 @TeleOp(name = "SixWheelDrive", group = "driving")
-public class SixWheel extends OpMode {
+public class BlueTeleOp extends OpMode {
 
     RobotClass robot;
     RobotUtils utils;
     String MOTIF;
     boolean Smanual = false;
     boolean Smanualatt = false;
-//    boolean Lmanual = false;
+    //    boolean Lmanual = false;
 //    boolean Lmanualatt = false;
     static final double     COUNTS_PER_MOTOR_REV    = 28.0;
     static final double     WHEEL_CIRCUMFERENCE_MM  = 101.6 * 3.14;
@@ -119,17 +119,17 @@ public class SixWheel extends OpMode {
 
     /**
      The function aprilTagTracking has 2 inputs:
-         <ul>
-             <li>
-                double tolerance: tolerance is used to define how precise you want the aiming to be
-                note that a lower tolerance does mean a more accurate target but in order to reduce oscillation,
-                you are also going to need to lower the speed otherwise you will get a lot of oscillation.
-             </li>
-             <li>
-                double speed: speed is how fast the tracking happens. here it is how fast the turntable is
-                going to be going and how fast it can turn.
-             </li>
-         </ul>
+     <ul>
+     <li>
+     double tolerance: tolerance is used to define how precise you want the aiming to be
+     note that a lower tolerance does mean a more accurate target but in order to reduce oscillation,
+     you are also going to need to lower the speed otherwise you will get a lot of oscillation.
+     </li>
+     <li>
+     double speed: speed is how fast the tracking happens. here it is how fast the turntable is
+     going to be going and how fast it can turn.
+     </li>
+     </ul>
      This function is a manuel override wrapper for the function faceAprilTag in the utils library
      and it allows the driver2 (Madelyn) to override the tracking of the april tag to make sure that
      we can control the robot if the robot goes haywire.
@@ -149,10 +149,10 @@ public class SixWheel extends OpMode {
                 turntablePower = -speed;
             }
             robot.turntable.setPower(turntablePower);
-        // If the bumpers on Madelyn's controller are not pressed then let the limelight
-        // handel the auto targeting code based on the utils function
+            // If the bumpers on Madelyn's controller are not pressed then let the limelight
+            // handel the auto targeting code based on the utils function
         } else {
-            utils.faceAprilTag(tolerance, speed, 3);
+            utils.faceAprilTag(tolerance, speed, 2);
         }
     }
 }

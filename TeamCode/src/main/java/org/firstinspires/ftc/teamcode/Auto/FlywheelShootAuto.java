@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Auto;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -8,7 +9,7 @@ import org.firstinspires.ftc.teamcode.RobotClass;
 import org.firstinspires.ftc.teamcode.RobotUtils;
 
 // This is commented out because we do not want it to show up in the driver control panel yet.
-// @Autonomous(name="AutonomousName")
+ @Autonomous(name="AutonomousName")
 public class FlywheelShootAuto extends LinearOpMode {
     RobotClass robot;
     RobotUtils utils;
@@ -31,6 +32,11 @@ public class FlywheelShootAuto extends LinearOpMode {
 
         if (opModeIsActive()) {
             robot.shooter.setVelocity(TargetVelocityInTPS);
+            sleep(20000);
+            while (opModeIsActive()) {
+                robot.intake1.setPower(-1);
+            }
+            sleep(20000);
         }
     }
 }

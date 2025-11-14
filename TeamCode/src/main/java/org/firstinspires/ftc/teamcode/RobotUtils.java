@@ -197,8 +197,8 @@ public class RobotUtils {
         }
     }
 
-    public void faceAprilTag(double tolerance, double speed) {
-        robot.limelight.pipelineSwitch(3);
+    public void faceAprilTag(double tolerance, double speed, int index) {
+        robot.limelight.pipelineSwitch(index);
         LLResult llResult = robot.limelight.getLatestResult();
         if (llResult != null && llResult.isValid()) {
             double tx = llResult.getTx() + 5; // offset correction
