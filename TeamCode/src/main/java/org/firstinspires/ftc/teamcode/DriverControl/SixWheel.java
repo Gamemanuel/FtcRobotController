@@ -15,8 +15,8 @@ public class SixWheel extends OpMode {
     String MOTIF;
     boolean Smanual = false;
     boolean Smanualatt = false;
-    boolean Lmanual = false;
-    boolean Lmanualatt = false;
+//    boolean Lmanual = false;
+//    boolean Lmanualatt = false;
 
     private double distance;
 
