@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Auto;
+package org.firstinspires.ftc.teamcode.Tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.lang.Math;
 
 @TeleOp(name = "FieldPositionCalculator", group = "Linear OpMode")
-public class FieldPositionCalculator extends LinearOpMode {
+public class RandyLimeLightFieldPositionSystem extends LinearOpMode {
 
     private VisionPortal visionPortal;
     private AprilTagProcessor aprilTag;
