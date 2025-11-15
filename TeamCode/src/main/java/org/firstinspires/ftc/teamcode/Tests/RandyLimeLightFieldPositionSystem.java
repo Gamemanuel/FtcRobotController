@@ -20,7 +20,6 @@ import java.lang.Math;
 @TeleOp(name = "FieldPositionCalculator", group = "Linear OpMode")
 public class RandyLimeLightFieldPositionSystem extends LinearOpMode {
 
-    private VisionPortal visionPortal;
     private AprilTagProcessor aprilTag;
 
     // We use a placeholder for a specific tag ID you might want to target (e.g., Tag 5 for DECODE goal)
@@ -32,7 +31,7 @@ public class RandyLimeLightFieldPositionSystem extends LinearOpMode {
         aprilTag = AprilTagProcessor.easyCreateWithDefaults();
 
         // Initialize the Vision Portal (assuming a webcam named "Webcam 1")
-        visionPortal = VisionPortal.easyCreateWithDefaults(
+        VisionPortal visionPortal = VisionPortal.easyCreateWithDefaults(
                 hardwareMap.get(WebcamName.class, "Webcam 1"), aprilTag);
 
         telemetry.addData("Status", "Initialized. Waiting for detections...");
