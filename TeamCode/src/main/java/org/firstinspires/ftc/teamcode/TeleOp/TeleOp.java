@@ -58,7 +58,6 @@ public abstract class TeleOp extends OpModeCommand {
         // END INTAKE CONFIG
 
         // Turret Config:
-
         // This will run automatically whenever no other command is using the turret. (auto-aim)
         turretSubsystem.setDefaultCommand(
                 new TurretAutoLLCMD(turretSubsystem, llSubsystem)
@@ -76,6 +75,7 @@ public abstract class TeleOp extends OpModeCommand {
         (leftBumper.or(rightBumper)).whileActiveOnce(manualOverrideCMD);
 
         // END TURRET CONFIG
+
 
     }
 }
