@@ -10,6 +10,7 @@ import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 
 import org.firstinspires.ftc.teamcode.Alliance;
 import org.firstinspires.ftc.teamcode.commands.intake.IntakeStopCMD;
+import org.firstinspires.ftc.teamcode.commands.shooter.ShooterAutoLLCMD;
 import org.firstinspires.ftc.teamcode.commands.turret.TurretAutoLLCMD;
 import org.firstinspires.ftc.teamcode.commands.turret.TurretManualCMD;
 import org.firstinspires.ftc.teamcode.config.OpModeCommand;
@@ -76,6 +77,11 @@ public abstract class TeleOp extends OpModeCommand {
 
         // END TURRET CONFIG
 
+        // Shooter config:
+        // this will turn off and on the flywheel with the press of the button x.
+        Madelyn.getGamepadButton(GamepadKeys.Button.X).toggleWhenActive(new ShooterAutoLLCMD(shooterSubsystem, llSubsystem));
+
+        // END OF SHOOTER CONFIG
 
     }
 }
