@@ -10,7 +10,7 @@ public class FloopSubsystem extends SubsystemBase {
     public int nFlick = 0;
 
     public FloopSubsystem(HardwareMap hMap){
-        hook = hMap.get(Servo.class,"gancho");
+        hook = hMap.get(Servo.class,"intake2");
 
     }
 
