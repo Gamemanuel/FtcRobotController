@@ -7,6 +7,7 @@ import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 
 import org.firstinspires.ftc.teamcode.Alliance;
+import org.firstinspires.ftc.teamcode.commands.intake.IntakeStopCMD;
 import org.firstinspires.ftc.teamcode.config.OpModeCommand;
 import org.firstinspires.ftc.teamcode.commands.intake.IntakeInCMD;
 import org.firstinspires.ftc.teamcode.commands.intake.IntakeOutCMD;
@@ -27,9 +28,7 @@ public abstract class TeleOp extends OpModeCommand {
         Hunter = new GamepadEx(gamepad1);
         Madelyn = new GamepadEx(gamepad2);
 
-
-        // This runs the driveTrain
-        // Pass suppliers for the joystick values
+        // This runs the driveTrain we Pass suppliers for the joystick values
         CommandScheduler.getInstance().setDefaultCommand(
                 drivetrainSubsystem,
                 drivetrainSubsystem.Drive(
@@ -37,6 +36,9 @@ public abstract class TeleOp extends OpModeCommand {
                         () -> (double) -gamepad1.left_stick_y
                 )
         );
+
+        // This is the intake configuration
+        CommandScheduler.getInstance().setDefaultCommand(intakeSubsystem, new IntakeStopCMD(intakeSubsystem));
 
         Button IntakeIn = new GamepadButton(
                 Madelyn, GamepadKeys.Button.A
@@ -49,5 +51,8 @@ public abstract class TeleOp extends OpModeCommand {
         );
 
         IntakeOut.whenHeld(new IntakeOutCMD(intakeSubsystem));
+        // END INTAKE CONFIG
+
+
     }
 }
