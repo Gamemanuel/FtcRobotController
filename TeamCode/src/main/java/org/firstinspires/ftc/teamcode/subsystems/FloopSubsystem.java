@@ -23,6 +23,6 @@ public class FloopSubsystem extends SubsystemBase {
     }
 
     public void hookDown(){
-        hook.setPosition(0.5);
+        hook.setPosition(0.25);
     }
 }

@@ -11,6 +11,7 @@ import com.seattlesolvers.solverslib.command.Subsystem;
 
 import org.firstinspires.ftc.teamcode.Alliance;
 import org.firstinspires.ftc.teamcode.subsystems.DrivetrainSubsystem;
+import org.firstinspires.ftc.teamcode.subsystems.FloopSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.IntakeSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.LLSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.ShooterSubsystem;
@@ -22,6 +23,7 @@ public abstract class OpModeCommand extends OpMode {
     public IntakeSubsystem intakeSubsystem;
     public TurretSubsystem turretSubsystem;
     public ShooterSubsystem shooterSubsystem;
+    public FloopSubsystem floopSubsystem;
     public LLSubsystem llSubsystem;
 
     private Alliance alliance;
@@ -59,7 +61,8 @@ public abstract class OpModeCommand extends OpMode {
                 drivetrainSubsystem =  new DrivetrainSubsystem(hardwareMap),
                 intakeSubsystem = new IntakeSubsystem(hardwareMap),
                 turretSubsystem = new TurretSubsystem(hardwareMap),
-                shooterSubsystem = new ShooterSubsystem(hardwareMap)
+                shooterSubsystem = new ShooterSubsystem(hardwareMap),
+                floopSubsystem = new FloopSubsystem(hardwareMap)
         );
 
         imu = hardwareMap.get(IMU.class, "imu");
