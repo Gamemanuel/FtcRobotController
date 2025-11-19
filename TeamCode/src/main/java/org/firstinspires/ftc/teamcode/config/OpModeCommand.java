@@ -12,6 +12,7 @@ import com.seattlesolvers.solverslib.command.Subsystem;
 import org.firstinspires.ftc.teamcode.Alliance;
 import org.firstinspires.ftc.teamcode.subsystems.DrivetrainSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.IntakeSubsystem;
+import org.firstinspires.ftc.teamcode.subsystems.LLSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.TurretSubsystem;
 
 public abstract class OpModeCommand extends OpMode {
@@ -19,6 +20,7 @@ public abstract class OpModeCommand extends OpMode {
     public DrivetrainSubsystem drivetrainSubsystem;
     public IntakeSubsystem intakeSubsystem;
     public TurretSubsystem turretSubsystem;
+    public LLSubsystem llSubsystem;
 
     private Alliance alliance;
 

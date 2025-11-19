@@ -29,7 +29,6 @@ public class LLSubsystem extends SubsystemBase {
     public void periodic(){
         result = limelight.getLatestResult();
 
-
         if (result != null && result.isValid()) {
             FtcDashboard.getInstance().getTelemetry().addData("LL AprilTag tA", result.getTa());
             FtcDashboard.getInstance().getTelemetry().addData("LL AprilTag tX", result.getTy());
