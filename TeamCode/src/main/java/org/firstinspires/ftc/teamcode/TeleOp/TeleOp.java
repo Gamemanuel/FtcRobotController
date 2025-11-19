@@ -5,10 +5,13 @@ import com.seattlesolvers.solverslib.command.CommandScheduler;
 import com.seattlesolvers.solverslib.command.RunCommand;
 import com.seattlesolvers.solverslib.command.button.Button;
 import com.seattlesolvers.solverslib.command.button.GamepadButton;
+import com.seattlesolvers.solverslib.command.button.Trigger;
 import com.seattlesolvers.solverslib.gamepad.GamepadEx;
 import com.seattlesolvers.solverslib.gamepad.GamepadKeys;
 
 import org.firstinspires.ftc.teamcode.Alliance;
+import org.firstinspires.ftc.teamcode.commands.floop.FloopDownCMD;
+import org.firstinspires.ftc.teamcode.commands.floop.UpAndDownCMD;
 import org.firstinspires.ftc.teamcode.commands.intake.IntakeStopCMD;
 import org.firstinspires.ftc.teamcode.commands.shooter.ShooterAutoLLCMD;
 import org.firstinspires.ftc.teamcode.commands.turret.TurretAutoLLCMD;
@@ -83,5 +86,14 @@ public abstract class TeleOp extends OpModeCommand {
 
         // END OF SHOOTER CONFIG
 
+        // Floop Config:
+        Trigger floopUpAndDown = new Trigger(() -> gamepad2.right_trigger >= 0.1);
+
+        floopUpAndDown.whenActive(new UpAndDownCMD(floopSubsystem));
+
+        Trigger floopDown = new Trigger(()-> gamepad2.left_trigger >= 0.1);
+
+        floopDown.whenActive(new FloopDownCMD(floopSubsystem));
+        // End Floop Config
     }
 }
