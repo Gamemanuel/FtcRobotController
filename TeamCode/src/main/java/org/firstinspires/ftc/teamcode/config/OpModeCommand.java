@@ -12,11 +12,13 @@ import com.seattlesolvers.solverslib.command.Subsystem;
 import org.firstinspires.ftc.teamcode.Alliance;
 import org.firstinspires.ftc.teamcode.subsystems.DrivetrainSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.IntakeSubsystem;
+import org.firstinspires.ftc.teamcode.subsystems.TurretSubsystem;
 
 public abstract class OpModeCommand extends OpMode {
 
     public DrivetrainSubsystem drivetrainSubsystem;
     public IntakeSubsystem intakeSubsystem;
+    public TurretSubsystem turretSubsystem;
 
     private Alliance alliance;
 
@@ -51,7 +53,8 @@ public abstract class OpModeCommand extends OpMode {
 
         register(
                 drivetrainSubsystem =  new DrivetrainSubsystem(hardwareMap),
-                intakeSubsystem = new IntakeSubsystem(hardwareMap)
+                intakeSubsystem = new IntakeSubsystem(hardwareMap),
+                turretSubsystem = new TurretSubsystem(hardwareMap)
         );
 
         imu = hardwareMap.get(IMU.class, "imu");
